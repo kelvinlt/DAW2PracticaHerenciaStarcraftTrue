@@ -9,6 +9,8 @@ import objects.Terran;
 import objects.Unidad;
 import objects.Zerg;
 import Exception.StarCraftException;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class PracticaHerenciaStarcraftTrue {
 
@@ -26,11 +28,17 @@ public class PracticaHerenciaStarcraftTrue {
                     case "c":
                         
                         break;
+                    case "r":
+                        
+                        break;
                     case "a":
                         altaEscuadron(splitOpcion);
                         break;
                     case "mt":
                         mostrarTodo();
+                        break;
+                    case "s":
+                        salir();
                         break;
 
                 }
@@ -133,5 +141,24 @@ public class PracticaHerenciaStarcraftTrue {
     public static void countLength(String[] n){
         int count = n.length;
         System.out.println(count);
+    }
+    
+    public static void clasificacion(){
+        
+        
+    }
+    
+    public static void registrarBatalla(String n){
+       
+        
+    }
+    
+    public static int randomNumber(){
+        int random = ThreadLocalRandom.current().nextInt(0, 9 + 1);
+        return random;
+    }
+    
+    public static void salir(){
+        System.exit(0);
     }
 }
