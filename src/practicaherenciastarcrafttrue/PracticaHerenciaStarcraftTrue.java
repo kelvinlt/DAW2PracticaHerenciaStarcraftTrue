@@ -19,6 +19,8 @@ public class PracticaHerenciaStarcraftTrue {
             System.out.println("Intro");
             String opcion = br.readLine();
             String[] splitOpcion = splitStringX(opcion);
+            
+            countLength(splitOpcion);
             while (!splitOpcion[0].equalsIgnoreCase("s")) {
                 switch (splitOpcion[0].toLowerCase()) {
                     case "c":
@@ -63,9 +65,15 @@ public class PracticaHerenciaStarcraftTrue {
                     altaProtoss(n);
                     break;
                 case "zerg":
+                    if(n.length==7){
+                        altaZerg(n);
+                    }else{
+                        System.out.println("< ERROR 001: Nº de argumentos invalido >");
+                    }
                     
                     break;
                 default:
+                    System.out.println("< ERROR 002: Especie incorrecta >");
                     break;
             }
         } catch (Exception e) {
@@ -107,9 +115,14 @@ public class PracticaHerenciaStarcraftTrue {
         double def = Double.parseDouble(n[4]);
         int var1 = Integer.parseInt(n[5]);
         int var2 = Integer.parseInt(n[6]);
-
+        /*===============*/
         Zerg zerg = new Zerg(nombre, victorias, atk, def, var1, var2);
         escuadrones.put(nombre, zerg);
         System.out.println("<OK: Escuadrón registrado>");
+    }
+    
+    public static void countLength(String[] n){
+        int count = n.length;
+        System.out.println(count);
     }
 }
