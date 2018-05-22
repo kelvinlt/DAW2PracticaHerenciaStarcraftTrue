@@ -8,6 +8,7 @@ import objects.Protoss;
 import objects.Terran;
 import objects.Unidad;
 import objects.Zerg;
+import Exception.StarCraftException;
 
 public class PracticaHerenciaStarcraftTrue {
 
@@ -20,7 +21,6 @@ public class PracticaHerenciaStarcraftTrue {
             String opcion = br.readLine();
             String[] splitOpcion = splitStringX(opcion);
             
-            countLength(splitOpcion);
             while (!splitOpcion[0].equalsIgnoreCase("s")) {
                 switch (splitOpcion[0].toLowerCase()) {
                     case "c":
@@ -59,24 +59,29 @@ public class PracticaHerenciaStarcraftTrue {
         try {
             switch (n[1].toLowerCase()) {
                 case "terran":
+                    if(n.length!=7){
+                        throw new StarCraftException("< ERROR 001: Nº de argumentos invalido >");
+                    }
                     altaTerran(n);
                     break;
                 case "protoss":
+                    if(n.length!=6){
+                        throw new StarCraftException("< ERROR 001: Nº de argumentos invalido >");
+                    }
                     altaProtoss(n);
                     break;
                 case "zerg":
-                    if(n.length==7){
-                        altaZerg(n);
-                    }else{
-                        System.out.println("< ERROR 001: Nº de argumentos invalido >");
+                    if(n.length!=7){
+                        throw new StarCraftException("< ERROR 001: Nº de argumentos invalido >");
                     }
-                    
-                    break;
+                    altaZerg(n);
+                    break;  
                 default:
                     System.out.println("< ERROR 002: Especie incorrecta >");
                     break;
             }
-        } catch (Exception e) {
+        } catch (StarCraftException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -107,13 +112,17 @@ public class PracticaHerenciaStarcraftTrue {
         System.out.println("<OK: Escuadrón registrado>");
     }
     
-    public static void altaZerg(String[] n){
+    public static void altaZerg(String[] n) throws StarCraftException{
         int victorias = 0;
         /*===============*/
         String nombre = n[2];
         double atk = Double.parseDouble(n[3]);
         double def = Double.parseDouble(n[4]);
         int var1 = Integer.parseInt(n[5]);
+        if(var1<0){
+        }else{
+            throw new StarCraftException("<>");
+        }
         int var2 = Integer.parseInt(n[6]);
         /*===============*/
         Zerg zerg = new Zerg(nombre, victorias, atk, def, var1, var2);
