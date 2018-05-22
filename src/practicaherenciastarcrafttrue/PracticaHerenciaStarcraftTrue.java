@@ -54,12 +54,6 @@ public class PracticaHerenciaStarcraftTrue {
     }
     
     public static void altaEscuadron(String[] n){
-        String nombre = "";
-        double atk = 0;
-        double def = 0;
-        int var1 = 0;
-        int var2 = 0;
-        int victorias = 0;
         try {
             switch (n[1].toLowerCase()) {
                 case "terran":
