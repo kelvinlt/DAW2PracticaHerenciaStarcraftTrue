@@ -38,7 +38,6 @@ public class PracticaHerenciaStarcraftTrue {
             }
         } catch (Exception e) {
         }
-
     }
 
     //Metodo para hace split
@@ -54,7 +53,6 @@ public class PracticaHerenciaStarcraftTrue {
         }
     }
     
-    
     public static void altaEscuadron(String[] n){
         String nombre = "";
         double atk = 0;
@@ -65,36 +63,13 @@ public class PracticaHerenciaStarcraftTrue {
         try {
             switch (n[1].toLowerCase()) {
                 case "terran":
-                    nombre = n[2];
-                    atk = Double.parseDouble(n[3]);
-                    def = Double.parseDouble(n[4]);
-                    var1 = Integer.parseInt(n[5]);
-                    var2 = Integer.parseInt(n[6]);
-
-                    Terran terran = new Terran(nombre, victorias, atk, def, var1, var2);
-                    escuadrones.put(nombre, terran);
-                    System.out.println("<OK: Escuadrón registrado>");
+                    altaTerran(n);
                     break;
                 case "protoss":
-                    nombre = n[2];
-                    atk = Double.parseDouble(n[3]);
-                    def = Double.parseDouble(n[4]);
-                    var1 = Integer.parseInt(n[5]);
-
-                    Protoss protos = new Protoss(nombre, victorias, atk, def, var1);
-                    escuadrones.put(nombre,protos);
-                    System.out.println("<OK: Escuadrón registrado>");
+                    altaProtoss(n);
                     break;
                 case "zerg":
-                    nombre = n[2];
-                    atk = Double.parseDouble(n[3]);
-                    def = Double.parseDouble(n[4]);
-                    var1 = Integer.parseInt(n[5]);
-                    var2 = Integer.parseInt(n[6]);
-
-                    Zerg zerg = new Zerg(nombre, victorias, atk, def, var1, var2);
-                    escuadrones.put(nombre, zerg);
-                    System.out.println("<OK: Escuadrón registrado>");
+                    
                     break;
                 default:
                     break;
@@ -103,4 +78,44 @@ public class PracticaHerenciaStarcraftTrue {
         }
     }
 
+    public static void altaTerran(String[] n){
+        int victorias = 0;
+        /*===============*/
+        String nombre = n[2];
+        double atk = Double.parseDouble(n[3]);
+        double def = Double.parseDouble(n[4]);
+        int var1 = Integer.parseInt(n[5]);
+        int var2 = Integer.parseInt(n[6]);
+        /*===============*/
+        Terran terran = new Terran(nombre, victorias, atk, def, var1, var2);
+        escuadrones.put(nombre, terran);
+        System.out.println("<OK: Escuadrón registrado>");
+    }
+    
+    public static void altaProtoss(String[] n){    
+        int victorias = 0;
+        /*===============*/
+        String nombre = n[2];
+        double atk = Double.parseDouble(n[3]);
+        double def = Double.parseDouble(n[4]);
+        int var1 = Integer.parseInt(n[5]);
+        /*===============*/
+        Protoss protos = new Protoss(nombre, victorias, atk, def, var1);
+        escuadrones.put(nombre,protos);
+        System.out.println("<OK: Escuadrón registrado>");
+    }
+    
+    public static void altaZerg(String[] n){
+        int victorias = 0;
+        /*===============*/
+        String nombre = n[2];
+        double atk = Double.parseDouble(n[3]);
+        double def = Double.parseDouble(n[4]);
+        int var1 = Integer.parseInt(n[5]);
+        int var2 = Integer.parseInt(n[6]);
+
+        Zerg zerg = new Zerg(nombre, victorias, atk, def, var1, var2);
+        escuadrones.put(nombre, zerg);
+        System.out.println("<OK: Escuadrón registrado>");
+    }
 }
