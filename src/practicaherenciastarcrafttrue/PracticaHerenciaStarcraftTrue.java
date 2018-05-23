@@ -11,7 +11,7 @@ import objects.Zerg;
 import Exception.StarCraftException;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
-
+ 
 public class PracticaHerenciaStarcraftTrue {
 
     static HashMap<String, Unidad> escuadrones = new HashMap<>();
@@ -29,7 +29,7 @@ public class PracticaHerenciaStarcraftTrue {
                         
                         break;
                     case "r":
-                        
+                        registrarBatalla(splitOpcion);
                         break;
                     case "a":
                         altaEscuadron(splitOpcion);
@@ -127,10 +127,6 @@ public class PracticaHerenciaStarcraftTrue {
         double atk = Double.parseDouble(n[3]);
         double def = Double.parseDouble(n[4]);
         int var1 = Integer.parseInt(n[5]);
-        if(var1<0){
-        }else{
-            throw new StarCraftException("<>");
-        }
         int var2 = Integer.parseInt(n[6]);
         /*===============*/
         Zerg zerg = new Zerg(nombre, victorias, atk, def, var1, var2);
@@ -148,9 +144,54 @@ public class PracticaHerenciaStarcraftTrue {
         
     }
     
-    public static void registrarBatalla(String n){
-       
+    public static void registrarBatalla(String[] n) throws StarCraftException{
+        int rondaActual=0;
+        Unidad teamA = searchTeam(n[1]);
+        Unidad teamB = searchTeam(n[2]);
+        int asaltosA = 0;
+        int asaltosB = 0;
         
+       
+        System.out.println("<Inicio de batalla... >");
+        
+        while (rondaActual<5){            
+            rondaActual++;
+            double temp1=randomNumber();
+            double temp2=randomNumber();
+            double totalAtck1 = teamA.atkTotal()-teamB.defTotal()+ temp1;
+            double totalAtck2 = teamB.atkTotal()-teamA.defTotal()+ temp2;
+            System.out.println("Asalto nº"+rondaActual);
+            System.out.println("Ataca "+teamA.getNombre()+" - Nº Aleatorio: "+temp1+" - Valor de su ataque: "+totalAtck1);
+            System.out.println("Ataca "+teamB.getNombre()+" - Nº Aleatorio: "+temp2+" - Valor de su ataque: "+totalAtck2);
+            if(totalAtck1>totalAtck2){
+                System.out.println("Ganador del asalto:"+teamA.getNombre());
+                asaltosA++;
+            }
+            if(totalAtck1<totalAtck2){
+                System.out.println("Ganador del asalto:"+teamB.getNombre());
+                asaltosB++;
+            }
+            if(totalAtck1==totalAtck2){
+                System.out.println("Empate");
+            } 
+        }
+        System.out.println("<Fin de batalla...>");
+        if(asaltosA>asaltosB){
+            System.out.println("<OK: La batalla la ha ganado el escuadron "+teamA.getNombre()+" con "+asaltosA+" asaltos>");
+        }
+        if(asaltosA<asaltosB){
+            System.out.println("<OK: La batalla la ha ganado el escuadron "+teamB.getNombre()+" con "+asaltosB+" asaltos>");
+        }
+        
+    }
+    
+    public static Unidad searchTeam(String n) throws StarCraftException{
+        if(!escuadrones.containsKey(n)){
+            throw new StarCraftException("<Error: No se ha encontrado el equipo>");
+        }
+        
+        Unidad value = escuadrones.get(n);
+        return value;
     }
     
     public static int randomNumber(){
