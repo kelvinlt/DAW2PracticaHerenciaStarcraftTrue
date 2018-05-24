@@ -9,13 +9,17 @@ import objects.Terran;
 import objects.Unidad;
 import objects.Zerg;
 import Exception.StarCraftException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.Comparator;
  
 public class PracticaHerenciaStarcraftTrue {
 
     static HashMap<String, Unidad> escuadrones = new HashMap<>();
-
+    
+    
     public static void main(String[] args) {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
@@ -26,7 +30,7 @@ public class PracticaHerenciaStarcraftTrue {
             while (!splitOpcion[0].equalsIgnoreCase("s")) {
                 switch (splitOpcion[0].toLowerCase()) {
                     case "c":
-                        
+                        clasificacion();
                         break;
                     case "r":
                         registrarBatalla(splitOpcion);
@@ -140,8 +144,15 @@ public class PracticaHerenciaStarcraftTrue {
     }
     
     public static void clasificacion(){
-        
-        
+     int contador = 0;
+     ArrayList<Unidad> escuadronOrdenado = new ArrayList<Unidad>(escuadrones.values());
+        Collections.sort(escuadronOrdenado, new comparatorRanking().reversed());
+        for (Unidad escuadron : escuadronOrdenado) {
+            if (contador < 3) {
+                System.out.println(escuadron);
+            }
+            contador++;
+        }  
     }
     
     public static void registrarBatalla(String[] n) throws StarCraftException{
@@ -178,13 +189,23 @@ public class PracticaHerenciaStarcraftTrue {
         System.out.println("<Fin de batalla...>");
         if(asaltosA>asaltosB){
             System.out.println("<OK: La batalla la ha ganado el escuadron "+teamA.getNombre()+" con "+asaltosA+" asaltos>");
+            updateUnidadVictorias(teamA);
         }
         if(asaltosA<asaltosB){
             System.out.println("<OK: La batalla la ha ganado el escuadron "+teamB.getNombre()+" con "+asaltosB+" asaltos>");
+            updateUnidadVictorias(teamB);
+        }else{
+            System.out.println("Empate");
         }
         
     }
     
+    public static void updateUnidadVictorias(Unidad n){
+        n.setVictorias(n.getVictorias()+1);
+        escuadrones.put(n.getNombre(),n);
+        
+    }
+
     public static Unidad searchTeam(String n) throws StarCraftException{
         if(!escuadrones.containsKey(n)){
             throw new StarCraftException("<Error: No se ha encontrado el equipo>");
