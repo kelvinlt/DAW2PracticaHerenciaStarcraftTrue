@@ -60,13 +60,7 @@ public class PracticaHerenciaStarcraftTrue {
         String[] splitString = conversor.split(" ");
         return splitString;
     } 
-    
-    public static void mostrarTodo(){
-        for (Map.Entry<String, Unidad> entry : escuadrones.entrySet()) {
-            System.out.println(entry);
-        }
-    }
-    
+     
     public static void altaEscuadron(String[] n){
         try {
             switch (n[1].toLowerCase()) {
@@ -136,11 +130,6 @@ public class PracticaHerenciaStarcraftTrue {
         Zerg zerg = new Zerg(nombre, victorias, atk, def, var1, var2);
         escuadrones.put(nombre, zerg);
         System.out.println("<OK: Escuadrón registrado>");
-    }
-    
-    public static void countLength(String[] n){
-        int count = n.length;
-        System.out.println(count);
     }
     
     public static void clasificacion(){
@@ -222,5 +211,16 @@ public class PracticaHerenciaStarcraftTrue {
     
     public static void salir(){
         System.exit(0);
+    }
+    
+    public static void mostrarTodo(){
+        for (Map.Entry<String, Unidad> entry : escuadrones.entrySet()) {
+            System.out.println(entry);
+        }
+    }
+       
+    public static void countLength(String[] n){
+        int count = n.length;
+        System.out.println(count);
     }
 }
